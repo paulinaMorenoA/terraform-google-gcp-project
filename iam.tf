@@ -18,7 +18,7 @@ locals {
   conditional_bindings = var.restricted_iam_admin_users == [] ? [] : module.get-iam-bindings.restricted_iam_admin_bindings
 }
 module "get-iam-bindings" {
-  source                     = "../terraform-google-iam-bindings"
+  source                     = "github.com/paulinaMorenoA/terraform-google-iam-bindings"
   users_roles_needed         = var.external_users_roles_needed
   restricted_iam_admin_users = var.restricted_iam_admin_users
 }
