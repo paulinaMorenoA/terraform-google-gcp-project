@@ -1,0 +1,112 @@
+org_id                    = "000000000000"
+billing_account           = "XXXXXX-XXXXXX-XXXXXX"
+terraform_service_account = "my-tf-svc-acct@my-tf-prj.iam.gserviceaccount.com"
+parent_folder_id          = "000000000000"
+
+service_projects = [
+  ### Project with subnets and IAM roles
+  {
+    name              = "my-smoke-prj-01"
+    random_project_id = true
+    shared_vpc_subnets = [
+      "projects/vpc-host-project/regions/us-central1/subnetworks/subnet-usc1-01",
+      "projects/vpc-host-project/regions/us-east1/subnetworks/subnet-use1-01",
+    ]
+
+    external_users_roles_needed = {
+      "group:test-grp-01@example.com"   = ["TenantAdmin"]
+      "group:test-grp-02@example.com"   = ["PowerUser"]
+      "group:test-grp-03@example.com"   = ["Developer", "Viewer"]
+    }
+    restricted_iam_admin_users     = []
+    allowed_trusted_image_projects = []
+
+    activate_additional_apis = [
+      "healthcare.googleapis.com",
+      "datafusion.googleapis.com",
+      "dataflow.googleapis.com",
+      "dataproc.googleapis.com",
+      "composer.googleapis.com",
+      "pubsub.googleapis.com",
+    ]
+
+    labels = {
+      billing_code    = "1234"
+      env             = "vpc_svc_prj"
+      primary_contact = "primary"
+      business_code   = "cvs_edp_ext"
+    }
+
+    budget_notification_channel_name       = null
+    budget_notification_channel_project_id = null
+
+    project_alert_spent_percents = null
+    project_budget_amount        = null
+  },
+  ### Project with one subnets and IAM roles and restricted IAM admin
+  {
+    name              = "my-smoke-prj-02"
+    random_project_id = true
+    shared_vpc_subnets = [
+      "projects/vpc-host-project/regions/us-central1/subnetworks/subnet-usc1-02",
+    ]
+
+    external_users_roles_needed = {
+      "group:test-grp-02-poc@example.com"                   = ["Viewer"]
+      "group:test-grp-02-databaseadministrator@example.com" = ["PowerUser"]
+      "group:test-grp-02-cloudoperations@example.com"       = ["Developer"]
+      "group:test-grp-01-poc@example.com"                   = ["TenantAdmin"]
+    }
+    restricted_iam_admin_users = ["group:test-grp-01-poc@example.com"]
+
+    allowed_trusted_image_projects = []
+
+    activate_additional_apis = [
+      "healthcare.googleapis.com",
+      "datafusion.googleapis.com",
+      "dataflow.googleapis.com",
+      "dataproc.googleapis.com",
+      "composer.googleapis.com",
+    ]
+
+    labels = {
+      billing_code    = "1234"
+      env             = "vpc_svc_prj-2"
+      primary_contact = "primary"
+      business_code   = "cvs_edp_ext"
+    }
+
+    budget_notification_channel_name       = null
+    budget_notification_channel_project_id = null
+
+    project_alert_spent_percents = null
+    project_budget_amount        = null
+  },
+  ### Project with NO subnets or IAM roles
+  {
+    name               = "my-smoke-prj-03"
+    random_project_id  = true
+    shared_vpc_subnets = []
+
+    external_users_roles_needed = {}
+    restricted_iam_admin_users  = []
+
+    allowed_trusted_image_projects = []
+
+    activate_additional_apis = []
+
+    labels = {
+      billing_code    = "1234"
+      env             = "vpc_svc_prj-3"
+      primary_contact = "primary"
+      business_code   = "cvs_edp_ext"
+    }
+
+    budget_notification_channel_name       = null
+    budget_notification_channel_project_id = null
+
+    project_alert_spent_percents = null
+    project_budget_amount        = null
+  },
+
+]
