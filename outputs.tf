@@ -20,5 +20,5 @@ output "svc_project" {
 
 output "projects_number" {
   description = "Project Numbers."
-  value = module.vpc_svc_project["vpc_svc_project"]["project_number"]
+  value = module.vpc_svc_project["project_number"]
 }
