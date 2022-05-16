@@ -17,3 +17,8 @@
 output "svc_project" {
   value = module.vpc_svc_project
 }
+
+output "projects_number" {
+  description = "Project Numbers."
+  value = [for project in module.vpc_svc_project : project["vpc_svc_project"]["project_number"]]
+}
