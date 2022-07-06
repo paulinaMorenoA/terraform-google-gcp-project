@@ -49,7 +49,7 @@ module "vpc_svc_project" {
   budget_monitoring_notification_channels = local.notification_channel_name
 
   svpc_host_project_id               = local.host_project_id
-  //grant_services_network_role        = local.grant_services_network_role
+  grant_services_network_role        = local.grant_services_network_role
   shared_vpc_subnets                 = var.shared_vpc_subnets
   vpc_service_control_attach_enabled = var.vpc_service_control_attach_enabled
   vpc_service_control_perimeter_name = "accessPolicies/${var.access_context_manager_policy_id}/servicePerimeters/${var.vpc_service_control_perimeter_name}"
