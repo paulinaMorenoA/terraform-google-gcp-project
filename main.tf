@@ -30,7 +30,7 @@ data "google_monitoring_notification_channel" "notification_channel" {
 
 module "vpc_svc_project" {
   source                      = "github.com/paulinaMorenoA/terraform-gcp-project-factory"
-  //version                     = "~> 11.1"
+  version                     = "~> 11.1"
   random_project_id           = var.random_project_id
   name                        = var.name
   org_id                      = var.org_id
