@@ -16,7 +16,7 @@
 
 locals {
   host_project_id             = length(var.shared_vpc_subnets) > 0 ? element(split("/", element(var.shared_vpc_subnets, 0)), 1) : var.svpc_host_project_id
-  grant_services_network_role = length(var.shared_vpc_subnets) > 0 ? true : false
+  grant_services_network_role = length(var.shared_vpc_subnets) > 0 ? true : true
   shared_vpc_subnets          = length(var.shared_vpc_subnets) > 0 ? var.shared_vpc_subnets : null
   notification_channel        = (var.budget_notification_channel_name == null && var.budget_notification_channel_project_id == null) ? 0 : 1
   notification_channel_name   = local.notification_channel == 1 ? [data.google_monitoring_notification_channel.notification_channel[0].name] : []
