@@ -29,6 +29,12 @@ variable "shared_vpc_subnets" {
   type        = list(string)
   default     = []
 }
+   
+variable "svpc_host_project_id" {
+  description = "The ID of the host project which hosts the shared VPC"
+  type        = string
+  default     = ""
+}
 
 variable "external_users_roles_needed" {
   description = "Map of external users/groups with roles"
