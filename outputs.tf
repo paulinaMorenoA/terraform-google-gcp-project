@@ -22,3 +22,13 @@ output "projects_number" {
   description = "Project Numbers."
   value = module.vpc_svc_project["project_number"]
 }
+  
+output "host_project_id" {
+  description = "Host project Id"
+  value = local.project_apis
+}
+  
+output "grant_services_network_role" {
+  description = "Grant Network role"
+  value = local.grant_services_network_role
+}
